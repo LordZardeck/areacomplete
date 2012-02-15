@@ -13,8 +13,7 @@ The plugin has one function autocomplete which takes one argument with the follo
 						callback should be called if you have anything to suggest to the text that was provided. 
 						You need to call the callback by providing an array of strings that you suggest. In case 
 						there is no match or no suggestion just call the callback with an empty array.
-		selection {Function} This is not implemented yet, but i plan to support a callback of when the user has 
-						selected a suggestion from your list.
+		selection {Function} takes 2 paramters - a string value of the selected text and the data attached to the selection. May return a string to replace the selection.
 
 You can also style the list as you like by setting your own styles in the auto.css file.
 
@@ -88,6 +87,10 @@ function initURLTextarea(){
 					if( urls[i].toLowerCase().indexOf(text.toLowerCase()) == 0 ) words.push(urls[i]);
 				}
 				cb(words);								
+			},
+			selected: function(text, data)
+			{
+				return 'http://' + text;
 			}
 		}
 	});
