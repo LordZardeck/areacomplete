@@ -313,23 +313,22 @@
 			
 		}		
 		
-		var attrs, value;
+		var attrs, value, d;
 		var regEx = new RegExp("("+text+")");
 		var taWidth = $(data.ta).width()-5;
 		var width = data.mode == "outter" ? taWidth : "";
 		$(data.list).empty();
 		for( var i=0; i< list.length; i++ )
 		{
-			attrs = {};
+			d = {};
 			if(typeof list[i] == "string")
 				value = list[i];
 			else
 			{
 				value = list[i].value;
-				attrs = list[i].attr;
+				d = list[i].data;
 			}
-			attrs = $.extend(attrs, {'data-value': value});
-			$(data.list).append($('<li>').css('width', width + 'px').attr(attrs).html(value.replace(regEx,"<mark>$1</mark>")));
+			$(data.list).append($('<li>').css('width', width + 'px').attr({'data-value': value}).html(value.replace(regEx,"<mark>$1</mark>")).data(d));
 		}
 	}	
 	
@@ -494,7 +493,7 @@
 		var c = data.ta.value.substr(selectionEnd, data.ta.value.length);
 		var scrollTop = data.ta.scrollTop;
 		if(data.on && data.on.selected)
-			var retText = data.on.selected(selectedText, li);
+			var retText = data.on.selected(selectedText, $(li).data());
 		if(retText) selectedText = retText;
 		data.ta.value = a + selectedText + c;
 		data.ta.scrollTop = scrollTop;
