@@ -1,7 +1,7 @@
 This plugin is forked from Amir's original textarea autocomplete plugin found here: http://www.amirharel.com/2011/03/07/implementing-autocomplete-jquery-plugin-for-textarea/
 
 ## Using the plugin
-The plugin has one function autocomplete which takes one argument with the following attributes:
+The plugin has one function areacomplete which takes one argument with the following attributes:
 
 	wordCount {Number} The amount of words you want to get from the position of the cursor in order to match it 
 						with your auto-complete list. usually this is set to 1.
@@ -79,7 +79,7 @@ var urls = [
 ];
 
 function initURLTextarea(){
-	$("#outter textarea").autocomplete({
+	$("#outter textarea").areacomplete({
 		wordCount:1,
 		mode: "outter",
 		on: {
@@ -104,7 +104,7 @@ function initContriesTextarea(){
 	$.ajax("countries.txt",{
 		success: function(data, textStatus, jqXHR){
 			countries = data.replace(/\r/g, "" ).split("\n"); 
-			$("#contries textarea").autocomplete({
+			$("#contries textarea").areacomplete({
 				wordCount:1,
 				on: {
 					query: function(text,cb){
