@@ -21,34 +21,34 @@ The plugin create a drop down menu to show the suggestion you have found for the
 
 So as you can see from this example, i set the drop down list with a "auto-list" class name, so you can style it however you want.
 Here is the CSS i applied for the purpose of the demos:
-```css
-ul.auto-list{
-	display: none;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	border: 1px solid green;
-	background-color: #A3DF99;
-	padding: 0;
-	margin:0;
-	list-style:none;
-}
-ul.auto-list > li:hover,
-ul.auto-list > li[data-selected=true]{
-	background-color: #236574;
-}
 
-ul.auto-list > li{
-	border: 1px solid gray;
-	cursor: default;
-	padding: 2px;
+	ul.auto-list{
+		display: none;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		border: 1px solid green;
+		background-color: #A3DF99;
+		padding: 0;
+		margin:0;
+		list-style:none;
+	}
+	ul.auto-list > li:hover,
+	ul.auto-list > li[data-selected=true]{
+		background-color: #236574;
+	}
 
-}
+	ul.auto-list > li{
+		border: 1px solid gray;
+		cursor: default;
+		padding: 2px;
 
-mark{
-	font-weight: bold;
-}
-```
+	}
+
+	mark{
+		font-weight: bold;
+	}
+
 
 Here's an example:
 
