@@ -1,4 +1,4 @@
-Using the plugin
+## Using the plugin
 The plugin has one function autocomplete which takes one argument with the following attributes:
 
 	wordCount {Number} The amount of words you want to get from the position of the cursor in order to match it with your auto-complete list. usually this is set to 1.
@@ -9,7 +9,7 @@ The plugin has one function autocomplete which takes one argument with the follo
 		
 You can also style the list as you like by setting your own styles in the auto.css file.
 
-Styling the drop down menu
+## Styling the drop down menu
 The plugin create a drop down menu to show the suggestion you have found for the current word that the user is typing. In order to style the to fits your needs, lets see the markup of the list:
 
 <ul class="auto-list" style="left: 91px; top: 113px; display: none;">
