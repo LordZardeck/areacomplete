@@ -47,4 +47,65 @@ Here is the CSS i applied for the purpose of the demos:
 		font-weight: bold;
 	}
 
-That's it - it's that simple.
+Here's an example:
+
+	<script type="text/javascript">
+		var urls = [
+			"facebook.com",
+			"google.com",
+			"twitter.com",
+			"amirharel.com",
+			"amazon.com",
+			"microsoft.com",
+			"quora.com",
+			"walla.co.il",
+			"ebay.com",
+			"gowala.com",
+			"myspace.com",
+			"youtube.com"		
+		];
+
+		function initURLTextarea(){
+			$("#outter textarea").autocomplete({
+				wordCount:1,
+				mode: "outter",
+				on: {
+					query: function(text,cb){
+						var words = [];
+						for( var i=0; i<urls.length; i++ ){
+							if( urls[i].toLowerCase().indexOf(text.toLowerCase()) == 0 ) words.push(urls[i]);
+						}
+						cb(words);								
+					}
+				}
+			});
+		}
+
+		var countries = [];
+
+		function initContriesTextarea(){
+			$.ajax("countries.txt",{
+				success: function(data, textStatus, jqXHR){
+					countries = data.replace(/\r/g, "" ).split("\n"); 
+					$("#contries textarea").autocomplete({
+						wordCount:1,
+						on: {
+							query: function(text,cb){
+								var words = [];
+								for( var i=0; i<countries.length; i++ ){
+									if( countries[i].toLowerCase().indexOf(text.toLowerCase()) == 0 ) words.push(countries[i]);
+									if( words.length > 5 ) break;
+								}
+								cb(words);								
+							}
+						}
+					});
+				}
+			});
+		}
+
+		$(document).ready(function(){
+			initContriesTextarea();
+			initURLTextarea();
+		});
+	</script>
