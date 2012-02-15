@@ -1,3 +1,5 @@
+This plugin is forked from Amir's original textarea autocomplete plugin found here: http://www.amirharel.com/2011/03/07/implementing-autocomplete-jquery-plugin-for-textarea/
+
 ## Using the plugin
 The plugin has one function autocomplete which takes one argument with the following attributes:
 
