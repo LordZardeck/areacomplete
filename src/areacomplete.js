@@ -313,7 +313,6 @@
 			
 		}		
 		
-		console.log(data.list);
 		var html = "";
 		var regEx = new RegExp("("+text+")");
 		var taWidth = $(data.ta).width()-5;
@@ -492,6 +491,8 @@
 		data.ta.scrollTop = scrollTop;
 		data.ta.selectionEnd = pos+1+seletedText.length;
 		hideList(data);
+		if(data.on && data.on.selected)
+			data.on.selected(seletedText);
 		$(data.ta).focus();	
 	}
 	
