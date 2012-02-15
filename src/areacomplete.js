@@ -301,7 +301,7 @@
 	}
 	
 	
-	function showList(data,list,text){
+	function showList(data, text, list){
 		if( !data.listVisible ){
 			data.listVisible = true;
 			var pos = getCursorPosition(data);
@@ -313,18 +313,24 @@
 			
 		}		
 		
-		var html = "";
+		var attrs, value;
 		var regEx = new RegExp("("+text+")");
 		var taWidth = $(data.ta).width()-5;
-		var width = data.mode == "outter" ? "style='width:"+taWidth+"px;'" : "";
-		for( var i=0; i< list.length; i++ ){
-
-			//var a = list[i].replace(regEx,"<mark>$1</mark>");
-			 
-			
-			html += "<li data-value='"+list[i]+"' "+width+">"+list[i].replace(regEx,"<mark>$1</mark>")+"</li>";
+		var width = data.mode == "outter" ? taWidth : "";
+		$(data.list).empty();
+		for( var i=0; i< list.length; i++ )
+		{
+			attrs = {};
+			if(typeof list[i] == "string")
+				value = list[i];
+			else
+			{
+				value = list[i].value;
+				attrs = list[i].attr;
+			}
+			attrs = $.extend(attrs, {'data-value': value});
+			$(data.list).append($('<li>').css('width', width + 'px').attr(attrs).html(value.replace(regEx,"<mark>$1</mark>")));
 		}
-		$(data.list).html(html);
 	}	
 	
 	function breakLines(text,data){
@@ -466,7 +472,7 @@
 	}
 	
 	function onUserSelected(li,data){
-		var seletedText = $(li).attr("data-value");
+		var selectedText = $(li).attr("data-value");
 		
 		
 		var selectionEnd = getTextAreaSelectionEnd(data.ta);//.selectionEnd;
@@ -484,15 +490,16 @@
 				wordsFound++;
 			}
 		}
-		var a = data.ta.value.substr(0,pos+1);
-		var c = data.ta.value.substr(selectionEnd,data.ta.value.length);
+		var a = data.ta.value.substr(0, pos + 1);
+		var c = data.ta.value.substr(selectionEnd, data.ta.value.length);
 		var scrollTop = data.ta.scrollTop;
-		data.ta.value = a+seletedText+c;
-		data.ta.scrollTop = scrollTop;
-		data.ta.selectionEnd = pos+1+seletedText.length;
-		hideList(data);
 		if(data.on && data.on.selected)
-			data.on.selected(seletedText);
+			var retText = data.on.selected(selectedText, li);
+		if(retText) selectedText = retText;
+		data.ta.value = a + selectedText + c;
+		data.ta.scrollTop = scrollTop;
+		data.ta.selectionEnd = pos + 1 + selectedText.length;
+		hideList(data);
 		$(data.ta).focus();	
 	}
 	
@@ -579,7 +586,7 @@
 				data.on.query(text,function(list){
 					//console.log("got list = ",list);
 					if( list.length ){
-						showList(data,list,text);	
+						showList(data, text, list);	
 					}
 					else{
 						hideList(data);
